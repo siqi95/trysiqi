@@ -92,7 +92,7 @@ public class SearchFiles {
         System.out.println("index = "+index);
         System.out.println(FSDirectory.open(Paths.get(index)));
         IndexSearcher searcher = new IndexSearcher(reader);
-        Analyzer analyzer = new EnglishAnalyzer();
+        Analyzer analyzer = new ClassicAnalyzer();
 
         BufferedReader in = null;
         if (queries != null) {
@@ -155,7 +155,7 @@ public class SearchFiles {
                     qq = QueryParser.escape(qq);
                     Query query = parser.parse(qq);
                     System.out.println("Searching for: " + query.toString(field));
-                    doPagingSearch(count-1, in, searcher, query, hitsPerPage, raw, queries == null && queryString == null);
+                    doPagingSearch(count, in, searcher, query, hitsPerPage, raw, queries == null && queryString == null);
 
                 }
                 count = count + 1;
@@ -170,7 +170,7 @@ public class SearchFiles {
         String qq = collection_query.get(count-1);
         qq = QueryParser.escape(qq);
         Query query = parser.parse(qq);
-        doPagingSearch(count-1,in, searcher, query, hitsPerPage, raw, queries == null && queryString == null);
+        doPagingSearch(count,in, searcher, query, hitsPerPage, raw, queries == null && queryString == null);
         reader.close();
     }
 
