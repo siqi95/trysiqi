@@ -27,6 +27,8 @@ import org.apache.lucene.index.IndexWriter;
 import org.apache.lucene.index.IndexWriterConfig.OpenMode;
 import org.apache.lucene.index.IndexWriterConfig;
 import org.apache.lucene.index.Term;
+import org.apache.lucene.search.similarities.BM25Similarity;
+import org.apache.lucene.search.similarities.Similarity;
 import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.FSDirectory;
 import org.apache.lucene.util.Version;
@@ -38,6 +40,8 @@ import java.util.ArrayList;
  */
 
 public class IndexFiles {
+
+    private static Object BM25Similarity;
 
     private IndexFiles() {}
 
@@ -87,6 +91,8 @@ public class IndexFiles {
             if (create) {
                 // Create a new index in the directory, removing any
                 // previously indexed documents:
+                //iwc.setSimilarity(new BM25Similarity());
+
                 iwc.setOpenMode(OpenMode.CREATE);
             } else {
                 // Add new documents to an existing index:

@@ -35,10 +35,14 @@ import org.apache.lucene.search.IndexSearcher;
 import org.apache.lucene.search.Query;
 import org.apache.lucene.search.ScoreDoc;
 import org.apache.lucene.search.TopDocs;
+import org.apache.lucene.search.similarities.BM25Similarity;
+import org.apache.lucene.search.similarities.Similarity;
 import org.apache.lucene.store.FSDirectory;
 
 /** Simple command-line based search demo. */
 public class SearchFiles {
+
+    private static Object BM25Similarity;
 
     private SearchFiles() {}
 
@@ -92,6 +96,7 @@ public class SearchFiles {
         System.out.println("index = "+index);
         System.out.println(FSDirectory.open(Paths.get(index)));
         IndexSearcher searcher = new IndexSearcher(reader);
+        //searcher.setSimilarity((new BM25Similarity()));
         Analyzer analyzer = new ClassicAnalyzer();
 
         BufferedReader in = null;
@@ -109,6 +114,7 @@ public class SearchFiles {
         collection_query.add(new_query);
         int count = 0;
         while (true) {
+            System.out.println("here is true");
             if (queries == null && queryString == null) {                        // prompt the user
                 System.out.println("Enter query: ");
             }
@@ -167,6 +173,7 @@ public class SearchFiles {
                 break;
             }
         }
+        System.out.println("count is " + count);
         String qq = collection_query.get(count-1);
         qq = QueryParser.escape(qq);
         Query query = parser.parse(qq);
@@ -219,7 +226,7 @@ public class SearchFiles {
                     System.out.println("doc="+hits[i].doc+" score="+hits[i].score);
                     continue;
                 }
-                String fileName = "/Users/siqiwei/Desktop/cran/cran_result.txt";
+                String fileName = "src/main/cran_result.txt";
                 FileWriter fileWriter = new FileWriter(fileName,true);
                 BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
 
