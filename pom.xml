@@ -30,6 +30,11 @@
       <artifactId>lucene-core</artifactId>
       <version>8.0.0</version>
     </dependency>
+    <dependency>
+      <groupId>org.apache.commons</groupId>
+      <artifactId>commons-lang3</artifactId>
+      <version>3.9</version>
+    </dependency>
 
 
     <dependency>
@@ -93,7 +98,7 @@
           <version>1.2.1</version>
           <configuration>
             <!--<mainClass>org.peopletry.siqi.IndexFiles</mainClass> -->
-            <mainClass>org.peopletry.siqi.SearchFiles</mainClass>
+            <mainClass>org.peopletry.siqi.IndexFiles</mainClass>
 
           </configuration>
         </plugin>

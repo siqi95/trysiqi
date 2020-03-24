@@ -36,6 +36,7 @@ import org.apache.lucene.search.Query;
 import org.apache.lucene.search.ScoreDoc;
 import org.apache.lucene.search.TopDocs;
 import org.apache.lucene.search.similarities.BM25Similarity;
+import org.apache.lucene.search.similarities.BooleanSimilarity;
 import org.apache.lucene.search.similarities.Similarity;
 import org.apache.lucene.store.FSDirectory;
 
@@ -96,8 +97,9 @@ public class SearchFiles {
         System.out.println("index = "+index);
         System.out.println(FSDirectory.open(Paths.get(index)));
         IndexSearcher searcher = new IndexSearcher(reader);
-        //searcher.setSimilarity((new BM25Similarity()));
-        Analyzer analyzer = new ClassicAnalyzer();
+        searcher.setSimilarity((new BooleanSimilarity()));
+
+        Analyzer analyzer = new EnglishAnalyzer();
 
         BufferedReader in = null;
         if (queries != null) {
